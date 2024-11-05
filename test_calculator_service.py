@@ -36,14 +36,12 @@ def test_calculate_multiplication_with_mock_verifies_get_data_called():
     assert result == 12         # 2 * 2 * 3 = 12
     mock_repository.get_data.assert_called_once()
 
-def test_calculate_division_with_stub_verifies_get_data_called():
-    # Arrange: létrehozunk egy mock-ot
-    stub_repository = Mock(IDataRepository)
-    stub_repository.get_data.return_value = 2
+def test_calculate_division_with_mock_verifies_get_data_called():
+    mock_repository = Mock(IDataRepository)
+    mock_repository.get_data.return_value = 3
 
-    calculator_service = CalculatorService(stub_repository)
-    # Act: meghívjuk a calculate_sum metódust
-    result = calculator_service.calculate_division(10, 5)
+    calculator_service = CalculatorService(mock_repository)
+    result = calculator_service.calculate_division(12, 2)
 
-    # Assert: ellenőrizzük az eredményt
-    assert result == 1     
+    assert result == 2
+    mock_repository.get_data.assert_called_once()
